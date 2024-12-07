@@ -3,36 +3,15 @@ import { useState } from 'react'
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-// function Header() {
-//   return (<h1>Simple React Application</h1>);
-// }
-
-// function Content(props) {
-//   return (<p style={{ color: props.color }}>{props.text}</p>);
-// }
-
-// function Footer() {
-//   return (<h1>Created by Me, of course.</h1>);
-// }
 
 // Header component
-function Header ({ message }) {
-  return <h1> {message}</h1>;
-}
-
-// FormInput component
-function FormInput ({ name, value, placeholder, onChange }) {
-  return {
-
-    
-  }
-
-
+function Header({ message }) {
+  return <h1 className="header-message"> {message}</h1>;
 }
 
 
+// Main App Component
 function App() {
-
   const [fullName, setFullName] = useState({
     fname: "",
     lname: "",
@@ -41,8 +20,8 @@ function App() {
   const [message, setMessage] = useState("");
 
   const inputEvent = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.name);
+    // console.log(event.target.value);
+    // console.log(event.target.name);
 
     const value = event.target.value;
     const name = event.target.name;
@@ -51,37 +30,41 @@ function App() {
       //console.log(preValue)
       if (name === "fName") {
         return {
-          fname: value,
-          lname: preValue.lname,
+          fname: value, // changed value
+          lname: preValue.lname, // unchanged value
         }
       } else if (name === "lName") {
         return {
           fname: preValue.fname,
           lname: value,
         }
-
       }
-
     }
-    )}
+    )
+  }
 
   const onSubmits = (event) => {
     event.preventDefault();
-    //alert("Form submitted")
+    
+    alert("Welcome to this world!")
+   
     // Show success message
-    setMessage(`Form submitted by ${fullName.fname} ${fullName.lname}`);
-    setFullName ({
+    setMessage(`Success! Form submitted by ${fullName.fname} ${fullName.lname}.`);
+    
+    setFullName({
       fname: "",
       lname: "",
     })
   };
 
+
   return (
     <>
       <div className="main-div">
 
+        {/* passing props to Header */}
         <Header message={message} />
-        
+
         <form onSubmit={onSubmits}>
           <div>
             <h1>Hello</h1>
@@ -90,15 +73,15 @@ function App() {
               placeholder="Enter Your Name"
               name="fName"
               onChange={inputEvent}
-            value={fullName.fname}
+              value={fullName.fname}
             />
-          <br />
+            <br />
             <input
               type="text"
               placeholder="Enter Your Last Name"
               name="lName"
               onChange={inputEvent}
-            value={fullName.lname}
+              value={fullName.lname}
             />
             <button type="submit"> Submit ✔ </button>
           </div>
